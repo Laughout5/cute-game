@@ -36,19 +36,19 @@
     function updateTurnDisplay() {
         if (gameActive) {
             if (currentPlayer === 'X') {
-                turnTextSpan.innerHTML = "🌸ninte turn";
+                turnTextSpan.innerHTML = "X turn🌸";
                 // optional: dynamically change turn icons alt text (images remain same placeholders)
                 if (turnIconLeft) turnIconLeft.alt = "X turn decoration";
                 if (turnIconRight) turnIconRight.alt = "X turn sparkle";
             } else {
-                turnTextSpan.innerHTML = "🌼eni njaan🌼";
+                turnTextSpan.innerHTML = "O turn🌼";
                 if (turnIconLeft) turnIconLeft.alt = "O turn decoration";
                 if (turnIconRight) turnIconRight.alt = "O turn sparkle";
             }
         } else {
-            if (winMessage.includes('X wins')) turnTextSpan.innerHTML = "belle resonillaattaa";
-            else if (winMessage.includes('O wins')) turnTextSpan.innerHTML = "🏆 O jeyichh! 🏆";
-            else if (winMessage.includes('draw')) turnTextSpan.innerHTML = "🍬 randaalu jeyichitilla 🍬";
+            if (winMessage.includes('X wins')) turnTextSpan.innerHTML = "X won";
+            else if (winMessage.includes('O wins')) turnTextSpan.innerHTML = "O won 🏆";
+            else if (winMessage.includes('draw')) turnTextSpan.innerHTML = "draw 🍬";
         }
     }
 
@@ -66,28 +66,28 @@
         if (winner) {
             gameActive = false;
             if (winner === 'X') {
-                winMessage = '🌸 nee belle show akandaa 🌸';
+                winMessage = 'X won 🌸';
                 scoreX++;
                 updateScoreUI();
                 statusTextSpan.innerText = winMessage;
-                turnTextSpan.innerText = "✨ X jeyich! ✨";
+                turnTextSpan.innerText = "✨ X won ✨";
             } else {
-                winMessage = '🌼 heheheee 🌼';
+                winMessage = 'O won 🌼';
                 scoreO++;
                 updateScoreUI();
                 statusTextSpan.innerText = winMessage;
-                turnTextSpan.innerText = "🍊 hehehe njaan jeyich! 🍊";
+                turnTextSpan.innerText = "🍊 O won 🍊";
             }
             updateTurnDisplay();
             return true;
         }
         else if (!board.includes('')) {
             gameActive = false;
-            winMessage = ' draw aahn show aakanda! 🌈 onnode kalikaan indaa?';
+            winMessage = 'draw';
             scoreDraw++;
             updateScoreUI();
             statusTextSpan.innerText = winMessage;
-            turnTextSpan.innerText = "🤝 tie aan! 🤝";
+            turnTextSpan.innerText = "🤝 draw 🤝";
             updateTurnDisplay();
             return true;
         }
@@ -96,11 +96,11 @@
 
     function handleCellClick(index) {
         if (!gameActive) {
-            statusTextSpan.innerText = "onnode kalikanenki new game touch cheyy";
+            statusTextSpan.innerText = "play again";
             return;
         }
         if (board[index] !== '') {
-            statusTextSpan.innerText = "vere ethenkilu edk";
+            statusTextSpan.innerText = "choose another";
             setTimeout(() => {
                 if(gameActive) statusTextSpan.innerText = `Current turn: ${currentPlayer === 'X' ? '🌸 X' : '🌼 O'}`;
                 else statusTextSpan.innerText = winMessage;
@@ -115,7 +115,7 @@
         if (!gameEnded) {
             currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
             updateTurnDisplay();
-            statusTextSpan.innerText = `✨ ${currentPlayer === 'X' ? '🌸 X' : '🌼 O'} nte chance! ✨`;
+            statusTextSpan.innerText = `✨ ${currentPlayer === 'X' ? '🌸 X' : '🌼 O'} 's chance ✨`;
         } else {
             updateTurnDisplay();
             renderBoard();
@@ -152,7 +152,7 @@
         winMessage = '';
         renderBoard();
         updateTurnDisplay();
-        statusTextSpan.innerText = "✨ aadyam muthale thodangeetta ✨";
+        statusTextSpan.innerText = "✨✨";
     }
 
     function fullReset() {
@@ -161,7 +161,7 @@
         scoreDraw = 0;
         updateScoreUI();
         resetGame();
-        statusTextSpan.innerText = "🌸 athyam muthale started, ok? 🌸";
+        statusTextSpan.innerText = "🌸🌸";
     }
 
     // ---------- Initialization ----------
@@ -169,7 +169,7 @@
         renderBoard();
         updateTurnDisplay();
         updateScoreUI();
-        statusTextSpan.innerText = "ethenkilm onn touch cheyy poothe 🌸";
+        statusTextSpan.innerText = "🌸";
         document.getElementById('resetBtn').addEventListener('click', resetGame);
         document.getElementById('fullResetBtn').addEventListener('click', fullReset);
     }
